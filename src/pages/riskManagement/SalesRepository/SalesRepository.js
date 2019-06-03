@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Table from './components/Table';
-
+import PageLoading from '@components/PageLoading';
 
 export default class SalesRepository extends Component {
   static displayName = 'SalesRepository';

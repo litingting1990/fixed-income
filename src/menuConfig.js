@@ -8,29 +8,29 @@ const headerMenuConfig = [
 
 const asideMenuConfig = [
 
-  {
-    name: '异常页',
-    path: '/exception',
-    icon: 'gaojingxinxi',
-    children: [
-      {
-        name: '204',
-        path: '/exception/204'
-      },
-      {
-        name: '403',
-        path: '/exception/403'
-      },
-      {
-        name: '404',
-        path: '/exception/404'
-      },
-      {
-        name: '500',
-        path: '/exception/500'
-      }
-    ]
-  },
+  // {
+  //   name: '异常页',
+  //   path: '/exception',
+  //   icon: 'gaojingxinxi',
+  //   children: [
+  //     {
+  //       name: '204',
+  //       path: '/exception/204'
+  //     },
+  //     {
+  //       name: '403',
+  //       path: '/exception/403'
+  //     },
+  //     {
+  //       name: '404',
+  //       path: '/exception/404'
+  //     },
+  //     {
+  //       name: '500',
+  //       path: '/exception/500'
+  //     }
+  //   ]
+  // },
   {
     name: '风险控制',
     path: '/riskManagement',

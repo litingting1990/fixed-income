@@ -1,3 +1,6 @@
+const path = require('path');
+
+
 module.exports = {
   entry: 'src/index.js',
   publicPath: './',
@@ -8,5 +11,12 @@ module.exports = {
     ['ice-plugin-moment-locales', {
       locales: ['zh-cn']
     }]
-  ]
+  ],
+  alias: {
+    '@components': path.resolve(__dirname, 'src/components/'),
+    '@api': path.resolve(__dirname, 'src/api/'),
+    '@pages': path.resolve(__dirname, 'src/pages/'),
+    '@store': path.resolve(__dirname, 'src/store/'),
+    '@utils': path.resolve(__dirname, 'src/utils/')
+  }
 };
