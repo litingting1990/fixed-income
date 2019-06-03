@@ -5,7 +5,6 @@ import { enquire } from 'enquire-js';
 
 import Header from './components/Header';
 import Aside from './components/Aside';
-import Footer from './components/Footer';
 import BasicLayoutHoc from './BasicLayoutHoc';
 import MainRoutes from './MainRoutes';
 import './index.scss';
@@ -21,7 +20,7 @@ export default class BasicLayout extends Component {
     super(props);
 
     this.state = {
-      isScreen: 'isDesktop',
+      isScreen: 'isDesktop'
     };
   }
 
@@ -46,9 +45,9 @@ export default class BasicLayout extends Component {
     const handler = {
       match: () => {
         this.setState({
-          isScreen: type,
+          isScreen: type
         });
-      },
+      }
     };
 
     return handler;
@@ -76,7 +75,6 @@ export default class BasicLayout extends Component {
             </Layout.Main>
           </Layout.Section>
 
-          <Footer />
         </Layout>
       </div>
     );

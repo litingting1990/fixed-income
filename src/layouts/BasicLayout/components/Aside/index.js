@@ -23,10 +23,11 @@ export default class Aside extends Component {
     super(props);
 
     const openKeys = this.getDefaultOpenKeys();
+
     this.state = {
       collapse: false,
       openDrawer: false,
-      openKeys,
+      openKeys
     };
 
     this.openKeysCache = openKeys;
@@ -37,8 +38,9 @@ export default class Aside extends Component {
    */
   toggleMenu = () => {
     const { openDrawer } = this.state;
+
     this.setState({
-      openDrawer: !openDrawer,
+      openDrawer: !openDrawer
     });
   };
 
@@ -47,8 +49,9 @@ export default class Aside extends Component {
    */
   toggleCollapse = () => {
     const { collapse } = this.state;
+
     this.setState({
-      collapse: !collapse,
+      collapse: !collapse
     });
   };
 
@@ -68,6 +71,7 @@ export default class Aside extends Component {
     const menus = this.getNavMenuItems(asideMenuConfig);
 
     let openKeys = [];
+
     if (Array.isArray(menus)) {
       asideMenuConfig.forEach((item, index) => {
         if (pathname.startsWith(item.path)) {
@@ -85,7 +89,7 @@ export default class Aside extends Component {
   onOpenChange = (openKeys) => {
     this.setState({
       openKeys,
-      openDrawer: false,
+      openDrawer: false
     });
     this.openKeysCache = openKeys;
   };
@@ -102,6 +106,7 @@ export default class Aside extends Component {
       .filter((item) => item.name && !item.hideInMenu)
       .map((item, index) => {
         const ItemDom = this.getSubMenuOrItem(item, index);
+
         return this.checkPermissionItem(item.authority, ItemDom);
       })
       .filter((item) => item);
@@ -147,6 +152,7 @@ export default class Aside extends Component {
   checkPermissionItem = (authority, ItemDom) => {
     if (Authorized.check) {
       const { check } = Authorized;
+
       return check(authority, ItemDom);
     }
 
@@ -155,8 +161,7 @@ export default class Aside extends Component {
 
   render() {
     const {
-      location: { pathname },
-      isMobile,
+      location: { pathname }
     } = this.props;
 
     const { openDrawer, collapse } = this.state;
@@ -164,18 +169,12 @@ export default class Aside extends Component {
     return (
       <div
         className={cx('ice-design-layout-aside', {
-          'open-drawer': openDrawer,
+          'open-drawer': openDrawer
         })}
       >
-        {isMobile && <Logo />}
 
-        {isMobile && !openDrawer && (
-          <a className="menu-btn" onClick={this.toggleMenu}>
-            <FoundationSymbol type="menu" size="small" />
-          </a>
-        )}
 
-        {!isMobile && (
+        {/* {
           <a className="collapse-btn" onClick={this.toggleCollapse}>
             <FoundationSymbol
               key={collapse}
@@ -183,7 +182,7 @@ export default class Aside extends Component {
               size="large"
             />
           </a>
-        )}
+        } */}
 
         <Nav
           style={{ width: collapse ? 60 : 200 }}

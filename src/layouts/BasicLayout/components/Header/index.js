@@ -6,32 +6,25 @@ import Layout from '@icedesign/layout';
 import FoundationSymbol from '@icedesign/foundation-symbol';
 import cx from 'classnames';
 import { Link, withRouter } from 'react-router-dom';
-import { FormattedMessage, injectIntl } from 'react-intl';
+
 import { headerMenuConfig } from '../../../../menuConfig';
-import SelectLang from '../../../../components/SelectLang';
 import Logo from '../Logo';
 
 import './index.scss';
 
-@injectIntl
 @withRouter
 export default class Header extends Component {
   handleSetting = () => {
     this.props.history.push('/account/setting');
   };
 
-  getLocaleKey = (item) => {
-    return `app.header.${item.name}`;
-  };
 
   render() {
     const {
-      isMobile,
       className,
-      style,
-      intl: { formatMessage },
+      style
     } = this.props;
-    console.log(this.props);
+
 
     return (
       <Layout.Header
@@ -47,6 +40,7 @@ export default class Header extends Component {
             <Nav direction="hoz" type="secondary" selectedKeys={[]}>
               {headerMenuConfig.map((nav, idx) => {
                 const linkProps = {};
+
                 if (nav.newWindow) {
                   linkProps.href = nav.path;
                   linkProps.target = '_blank';
@@ -55,7 +49,8 @@ export default class Header extends Component {
                 } else {
                   linkProps.to = nav.path;
                 }
-                const name = formatMessage({ id: this.getLocaleKey(nav) });
+
+
                 return (
                   <Nav.Item key={idx}>
                     {linkProps.to ? (
@@ -63,14 +58,12 @@ export default class Header extends Component {
                         {nav.icon ? (
                           <FoundationSymbol type={nav.icon} size="small" />
                         ) : null}{' '}
-                        {!isMobile ? name : null}
                       </Link>
                     ) : (
                       <a {...linkProps}>
                         {nav.icon ? (
                           <FoundationSymbol type={nav.icon} size="small" />
                         ) : null}{' '}
-                        {!isMobile ? name : null}
                       </a>
                     )}
                   </Nav.Item>
@@ -80,8 +73,6 @@ export default class Header extends Component {
           ) : null}
           {/* Header 菜单项 end */}
 
-          {/* 多语言选择 */}
-          <SelectLang />
 
           {/* Header 右侧内容块 */}
           <Balloon
@@ -95,11 +86,11 @@ export default class Header extends Component {
                 />
                 <div className="user-profile">
                   <span className="user-name">
-                    <FormattedMessage id="app.header.user.name" />
+                    ben
                   </span>
                   <br />
                   <span className="user-department">
-                    <FormattedMessage id="app.header.user.department" />
+                    技术部
                   </span>
                 </div>
                 <FoundationSymbol
@@ -118,14 +109,14 @@ export default class Header extends Component {
                 onClick={this.handleSetting}
               >
                 <FoundationSymbol type="repair" size="small" />
-                <FormattedMessage id="app.header.user.setting" />
+                设置
               </li>
               <li
                 className="user-profile-menu-item"
                 onClick={this.props.handleLogout}
               >
                 <FoundationSymbol type="person" size="small" />
-                <FormattedMessage id="app.header.user.logout" />
+                退出
               </li>
             </ul>
           </Balloon>

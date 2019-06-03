@@ -28,8 +28,8 @@ class UserRegister extends Component {
         name: '',
         email: '',
         passwd: '',
-        rePasswd: '',
-      },
+        rePasswd: ''
+      }
     };
   }
 
@@ -57,7 +57,7 @@ class UserRegister extends Component {
 
   formChange = (value) => {
     this.setState({
-      value,
+      value
     });
   };
 

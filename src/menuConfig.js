@@ -3,20 +3,7 @@
 // asideMenuConfig：侧边导航配置
 
 const headerMenuConfig = [
-  {
-    name: 'feedback',
-    path: 'https://github.com/alibaba/ice',
-    external: true,
-    newWindow: true,
-    icon: 'message'
-  },
-  {
-    name: 'help',
-    path: 'https://alibaba.github.io/ice',
-    external: true,
-    newWindow: true,
-    icon: 'bangzhu'
-  }
+
 ];
 
 const asideMenuConfig = [
