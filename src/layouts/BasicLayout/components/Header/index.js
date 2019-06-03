@@ -1,156 +1,136 @@
+/* eslint jsx-a11y/no-noninteractive-element-interactions:0 */
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Balloon, Icon, Nav } from '@alifd/next';
-import FoundationSymbol from '@icedesign/foundation-symbol';
+import { Balloon, Nav } from '@alifd/next';
 import IceImg from '@icedesign/img';
+import Layout from '@icedesign/layout';
+import FoundationSymbol from '@icedesign/foundation-symbol';
+import cx from 'classnames';
+import { Link, withRouter } from 'react-router-dom';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { headerMenuConfig } from '../../../../menuConfig';
+import SelectLang from '../../../../components/SelectLang';
 import Logo from '../Logo';
+
 import './index.scss';
 
+@injectIntl
 @withRouter
 export default class Header extends Component {
-  render() {
-    const { location = {} } = this.props;
-    const { pathname } = location;
-    return (
-      <div className="header-container">
-        <Logo isDark />
-        <div className="header-navbar">
-          <Nav
-            className="header-navbar-menu"
-            selectedKeys={[pathname]}
-            defaultSelectedKeys={[pathname]}
-            direction="hoz"
-          >
-            {headerMenuConfig &&
-              headerMenuConfig.length > 0 &&
-              headerMenuConfig.map((nav, index) => {
-                if (nav.children && nav.children.length > 0) {
-                  return (
-                    <Nav.SubNav
-                      triggerType="click"
-                      key={index}
-                      title={
-                        <span>
-                          {nav.icon ? (
-                            <FoundationSymbol
-                              style={{ marginRight: '8px' }}
-                              size="small"
-                              type={nav.icon}
-                            />
-                          ) : null}
-                          <span>{nav.name}</span>
-                        </span>
-                      }
-                    >
-                      {nav.children.map((item) => {
-                        const linkProps = {};
-                        if (item.external) {
-                          if (item.newWindow) {
-                            linkProps.target = '_blank';
-                          }
+  handleSetting = () => {
+    this.props.history.push('/account/setting');
+  };
 
-                          linkProps.href = item.path;
-                          return (
-                            <Nav.Item key={item.path}>
-                              <a {...linkProps}>
-                                <span>{item.name}</span>
-                              </a>
-                            </Nav.Item>
-                          );
-                        }
-                        linkProps.to = item.path;
-                        return (
-                          <Nav.Item key={item.path}>
-                            <Link {...linkProps}>
-                              <span>{item.name}</span>
-                            </Link>
-                          </Nav.Item>
-                        );
-                      })}
-                    </Nav.SubNav>
-                  );
-                }
+  getLocaleKey = (item) => {
+    return `app.header.${item.name}`;
+  };
+
+  render() {
+    const {
+      isMobile,
+      className,
+      style,
+      intl: { formatMessage },
+    } = this.props;
+    console.log(this.props);
+
+    return (
+      <Layout.Header
+        theme="dark"
+        className={cx('ice-design-layout-header', className)}
+        style={{ ...style }}
+      >
+        <Logo />
+
+        <div className="ice-design-layout-header-menu">
+          {/* Header 菜单项 begin */}
+          {headerMenuConfig && headerMenuConfig.length > 0 ? (
+            <Nav direction="hoz" type="secondary" selectedKeys={[]}>
+              {headerMenuConfig.map((nav, idx) => {
                 const linkProps = {};
-                if (nav.external) {
-                  if (nav.newWindow) {
-                    linkProps.target = '_blank';
-                  }
+                if (nav.newWindow) {
                   linkProps.href = nav.path;
-                  return (
-                    <Nav.Item key={nav.path}>
-                      <a {...linkProps}>
-                        <span>
-                          {nav.icon ? (
-                            <FoundationSymbol
-                              style={{ marginRight: '8px' }}
-                              size="small"
-                              type={nav.icon}
-                            />
-                          ) : null}
-                          {nav.name}
-                        </span>
-                      </a>
-                    </Nav.Item>
-                  );
+                  linkProps.target = '_blank';
+                } else if (nav.external) {
+                  linkProps.href = nav.path;
+                } else {
+                  linkProps.to = nav.path;
                 }
-                linkProps.to = nav.path;
+                const name = formatMessage({ id: this.getLocaleKey(nav) });
                 return (
-                  <Nav.Item key={nav.path}>
-                    <Link {...linkProps}>
-                      <span>
+                  <Nav.Item key={idx}>
+                    {linkProps.to ? (
+                      <Link {...linkProps}>
                         {nav.icon ? (
-                          <FoundationSymbol
-                            style={{ marginRight: '8px' }}
-                            size="small"
-                            type={nav.icon}
-                          />
-                        ) : null}
-                        {nav.name}
-                      </span>
-                    </Link>
+                          <FoundationSymbol type={nav.icon} size="small" />
+                        ) : null}{' '}
+                        {!isMobile ? name : null}
+                      </Link>
+                    ) : (
+                      <a {...linkProps}>
+                        {nav.icon ? (
+                          <FoundationSymbol type={nav.icon} size="small" />
+                        ) : null}{' '}
+                        {!isMobile ? name : null}
+                      </a>
+                    )}
                   </Nav.Item>
                 );
               })}
-          </Nav>
+            </Nav>
+          ) : null}
+          {/* Header 菜单项 end */}
+
+          {/* 多语言选择 */}
+          <SelectLang />
+
+          {/* Header 右侧内容块 */}
           <Balloon
-            triggerType="hover"
             trigger={
-              <div
-                className="ice-design-header-userpannel"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  fontSize: 12,
-                }}
-              >
+              <div className="ice-design-header-userpannel">
                 <IceImg
                   height={40}
                   width={40}
-                  src={require('./images/avatar.png')}
+                  src="https://img.alicdn.com/tfs/TB1L6tBXQyWBuNjy0FpXXassXXa-80-80.png"
                   className="user-avatar"
                 />
                 <div className="user-profile">
-                  <span className="user-name" style={{ fontSize: '13px' }}>
-                    淘小宝
+                  <span className="user-name">
+                    <FormattedMessage id="app.header.user.name" />
                   </span>
                   <br />
-                  <span className="user-department">技术部</span>
+                  <span className="user-department">
+                    <FormattedMessage id="app.header.user.department" />
+                  </span>
                 </div>
-                <Icon type="arrow-down" size="xxs" className="icon-down" />
+                <FoundationSymbol
+                  type="angle-down"
+                  size="small"
+                  className="icon-down"
+                />
               </div>
             }
             closable={false}
             className="user-profile-menu"
           >
             <ul>
-              <li className="user-profile-menu-item">
-                <Link to="/user/login">退出登录</Link>
+              <li
+                className="user-profile-menu-item"
+                onClick={this.handleSetting}
+              >
+                <FoundationSymbol type="repair" size="small" />
+                <FormattedMessage id="app.header.user.setting" />
+              </li>
+              <li
+                className="user-profile-menu-item"
+                onClick={this.props.handleLogout}
+              >
+                <FoundationSymbol type="person" size="small" />
+                <FormattedMessage id="app.header.user.logout" />
               </li>
             </ul>
           </Balloon>
         </div>
-      </div>
+      </Layout.Header>
     );
   }
 }
