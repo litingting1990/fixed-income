@@ -4,14 +4,19 @@
 
 const headerMenuConfig = [
   {
-    name: 'feedback',
+    name: '首页',
+    path: '/',
+    icon: 'home',
+  },
+  {
+    name: '反馈',
     path: 'https://github.com/alibaba/ice',
     external: true,
     newWindow: true,
     icon: 'message',
   },
   {
-    name: 'help',
+    name: '帮助',
     path: 'https://alibaba.github.io/ice',
     external: true,
     newWindow: true,
@@ -21,125 +26,22 @@ const headerMenuConfig = [
 
 const asideMenuConfig = [
   {
-    name: 'Dashboard',
-    path: '/dashboard',
-    icon: 'home2',
+    name: '管理概况',
+    path: '/manage',
+    icon: 'account',
     children: [
-      {
-        name: 'monitor',
-        path: '/dashboard/monitor',
-      },
+      { name: '公司管理', path: '/manage/company', icon: 'set' },
+      { name: '部门管理', path: '/manage/department', icon: 'lights' },
+      { name: '团队管理', path: '/manage/team', icon: 'atm' },
     ],
   },
   {
-    name: 'chart',
-    path: '/chart',
-    icon: 'chart1',
+    name: '专项管理',
+    path: '/special',
+    icon: 'set',
     children: [
-      {
-        name: 'basic',
-        path: '/chart/basic',
-      },
-      {
-        name: 'general',
-        path: '/chart/general',
-      },
-    ],
-  },
-  {
-    name: '表格页',
-    path: '/table',
-    icon: 'table',
-    children: [
-      {
-        name: 'basic',
-        path: '/table/basic',
-        // authority: 'admin',
-      },
-      {
-        name: 'general',
-        path: '/table/general',
-        // authority: 'user',
-      },
-    ],
-  },
-  {
-    name: '列表页',
-    path: '/list',
-    icon: 'copy',
-    children: [
-      {
-        name: 'basic',
-        path: '/list/basic',
-      },
-      {
-        name: 'general',
-        path: '/list/general',
-      },
-    ],
-  },
-  {
-    name: 'profile',
-    path: '/profile',
-    icon: 'cascades',
-    children: [
-      {
-        name: 'basic',
-        path: '/profile/basic',
-      },
-      {
-        name: 'terms',
-        path: '/profile/general',
-      },
-    ],
-  },
-  {
-    name: 'result',
-    path: '/result',
-    icon: 'edit2',
-    children: [
-      {
-        name: 'success',
-        path: '/result/success',
-      },
-      {
-        name: 'fail',
-        path: '/result/fail',
-      },
-    ],
-  },
-  {
-    name: 'account',
-    path: '/account',
-    icon: 'person',
-    children: [
-      {
-        name: 'setting',
-        path: '/account/setting',
-      },
-    ],
-  },
-  {
-    name: 'exception',
-    path: '/exception',
-    icon: 'gaojingxinxi',
-    children: [
-      {
-        name: '204',
-        path: '/exception/204',
-      },
-      {
-        name: '403',
-        path: '/exception/403',
-      },
-      {
-        name: '404',
-        path: '/exception/404',
-      },
-      {
-        name: '500',
-        path: '/exception/500',
-      },
+      { name: '成本管理', path: '/special/cost', icon: 'refresh' },
+      { name: '质量管理', path: '/special/cluster', icon: 'account' },
     ],
   },
 ];

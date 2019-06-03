@@ -1,74 +1,32 @@
 .ice-layout {
-  .ice-design-layout-aside {
-    .next-nav,
-    .next-nav-sub-nav-item {
-      background: transparent;
+  .ice-layout-aside.custom-aside {
+    background: #2f323f;
+    box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
+    .aside-logo {
+      height: 62px;
+      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2f323f;
     }
-    .next-nav .next-nav-item.next-menu-item {
-      background: transparent;
-      color: white;
-    }
-    .next-nav .next-menu-item-text i {
-      margin-right: 8px;
-      font-weight: 500;
-    }
-    .next-nav .next-menu-sub-menu .next-menu-item {
-      transition: none;
-
-      &.next-selected,
-      &:hover {
-        background: $color-brand1-6;
-        border-radius: $corner-2;
+    .custom-menu {
+      width: 240px;
+      height: 100vh;
+      padding-top: 20px;
+      border-radius: 6px;
+      box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+      .next-menu-sub-menu {
+        background: #2c2e39;
+        .next-menu-item {
+          -webkit-font-smoothing: antialiased;
+        }
       }
-    }
-    .collapse-btn {
-      cursor: pointer;
-      display: block;
-      width: 100%;
-      text-align: center;
-      margin-bottom: 20px;
-      color: white;
-    }
-
-    .menu-btn {
-      position: fixed;
-      left: 0;
-      top: 82px;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 0 6px 6px 0;
-      color: #fff;
-      background: #2077ff;
-      text-align: center;
-      cursor: pointer;
-      z-index: 9;
-      text-decoration: none;
-      &:hover {
-        color: #e7e7e7;
+      .next-menu-item {
+        color: #fff;
       }
-    }
-  }
-}
-
-@media screen and (max-width: 1199px) {
-  .ice-layout {
-    .ice-design-layout-aside {
-      position: fixed;
-      left: -256px;
-      top: 0px;
-      bottom: 0;
-      padding: 0 20px;
-      background: #2e323e !important;
-      z-index: 9999;
-    }
-
-    .open-drawer {
-      transform: translateX(256px);
-      .logo {
-        width: 200px;
-        margin: 20px 0;
-        text-align: center;
+      .next-selected {
+        background: #447eff;
       }
     }
   }
