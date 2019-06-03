@@ -10,13 +10,10 @@ import '@alifd/next/reset.scss';
 // 引入基础配置文件
 import router from './router';
 import configureStore from './configureStore';
-import LanguageProvider from './components/LocaleProvider';
-import { getLocale } from './utils/locale';
 
 const initialState = {};
 const history = createHashHistory();
 const store = configureStore(initialState, history);
-const locale = getLocale();
 const ICE_CONTAINER = document.getElementById('ice-container');
 
 if (!ICE_CONTAINER) {
@@ -24,10 +21,8 @@ if (!ICE_CONTAINER) {
 }
 
 ReactDOM.render(
-  <LanguageProvider locale={locale}>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>{router()}</ConnectedRouter>
-    </Provider>
-  </LanguageProvider>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>{router()}</ConnectedRouter>
+  </Provider>,
   ICE_CONTAINER
 );

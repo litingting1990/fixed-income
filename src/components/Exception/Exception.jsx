@@ -11,7 +11,7 @@ export default class Exception extends Component {
     description: '抱歉，你访问的页面不存在',
     image: 'https://img.alicdn.com/tfs/TB1ODH2GAvoK1RjSZPfXXXPKFXa-780-780.png',
     backText: '返回首页',
-    redirect: '/',
+    redirect: '/'
   };
 
   static propTypes = {
@@ -19,11 +19,12 @@ export default class Exception extends Component {
     description: PropTypes.string,
     image: PropTypes.string,
     backText: PropTypes.string,
-    redirect: PropTypes.string,
+    redirect: PropTypes.string
   };
 
   render() {
     const { statusCode, description, image, backText, redirect } = this.props;
+
     return (
       <IceContainer>
         <div className="exception-content">

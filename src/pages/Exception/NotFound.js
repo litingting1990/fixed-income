@@ -1,16 +1,14 @@
 import React from 'react';
-import { injectIntl } from 'react-intl';
 import Exception from '../../components/Exception';
 
-const NotFound = ({ intl }) => {
+const NotFound = () => {
   return (
     <Exception
-      statusCode="400"
+      statusCode="404"
       image="https://img.alicdn.com/tfs/TB1BJ_3GxTpK1RjSZFKXXa2wXXa-260-260.png"
-      description={intl.formatMessage({ id: 'app.exception.description.404' })}
-      backText={intl.formatMessage({ id: 'app.exception.backtext' })}
+      description="抱歉，你访问的页面不存在"
     />
   );
 };
 
-export default injectIntl(NotFound);
+export default NotFound;
