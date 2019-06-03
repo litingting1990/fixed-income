@@ -21,7 +21,7 @@ class MainRoutes extends Component {
         if (item.children[0] && item.children[0].path) {
           redirectData.push({
             from: `${item.path}`,
-            to: `${item.children[0].path}`,
+            to: `${item.children[0].path}`
           });
           item.children.forEach((children) => {
             getRedirect(children);
@@ -53,6 +53,7 @@ class MainRoutes extends Component {
 
   render() {
     const redirectData = this.getRedirectData();
+
     return (
       <Switch>
         {/* 渲染权限路由表 */}
@@ -64,8 +65,8 @@ class MainRoutes extends Component {
           return <Redirect key={index} exact from={item.from} to={item.to} />;
         })}
 
-        {/* 首页默认重定向到 /dashboard */}
-        <Redirect exact from="/" to="/dashboard/monitor" />
+        {/* 首页默认重定向到 /riskManagement/salesRepository */}
+        <Redirect exact from="/" to="/riskManagement/salesRepository" />
 
         {/* 未匹配到的路由重定向到 404 */}
         <Route component={NotFound} />

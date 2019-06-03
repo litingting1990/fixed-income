@@ -3,10 +3,10 @@ module.exports = {
   publicPath: './',
   plugins: [
     ['ice-plugin-fusion', {
-      theme: '@icedesign/theme',
+      theme: '@icedesign/theme'
     }],
     ['ice-plugin-moment-locales', {
-      locales: ['zh-cn'],
-    }],
-  ],
+      locales: ['zh-cn']
+    }]
+  ]
 };
