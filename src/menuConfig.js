@@ -22,7 +22,7 @@ const headerMenuConfig = [
 const asideMenuConfig = [
 
   {
-    name: 'exception',
+    name: '异常页',
     path: '/exception',
     icon: 'gaojingxinxi',
     children: [
