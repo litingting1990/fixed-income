@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
 import { Table, Pagination, Button, Dialog } from '@alifd/next';
 import IceContainer from '@icedesign/container';
+import { success } from '@utils/iceNotification';
+import { addData } from '@api/riskManagement/SalesRepository';
 
-
+import AddDialog from './AddDialog';
 // Random Numbers
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+const randomCoding = () => {
+  const result = [];
+  const n = 16;
+
+  for (let i = 0; i < n; i++) {
+    const ranNum = Math.ceil(Math.random() * 25);
+
+    result.push(String.fromCharCode(65 + ranNum));
+  }
+  return result.join('');
+
 };
 
 // MOCK 数据，实际业务按需进行替换
 const getData = (length = 10) => {
   return Array.from({ length }).map(() => {
     return {
-      name: ['淘小宝', '淘二宝'][random(0, 1)],
-      level: ['普通会员', '白银会员', '黄金会员', 'VIP 会员'][random(0, 3)],
-      balance: random(10000, 100000),
-      accumulative: random(50000, 100000),
-      regdate: `2018-12-1${random(1, 9)}`,
-      birthday: `1992-10-1${random(1, 9)}`,
-      store: ['余杭盒马店', '滨江盒马店', '西湖盒马店'][random(0, 2)]
+      organizationId: randomCoding(),
+      organizationIdName: ['宝钢', '武钢', '马钢', '找钢网', '咪咕', '国益资本'][random(0, 5)],
+      level: ['黑名单', '灰名单'][random(0, 1)],
+      status: ['在库', '已出库'][random(0, 1)],
+      inOut: ['入库', '出库'][random(0, 1)],
+      inOutTime: `2${random(1, 9)}1${random(1, 9)}-1${random(1, 9)}-1${random(1, 9)}`,
+      inOutPerson: ['黎明', '张三', '李四', '马云'][random(0, 3)]
     };
   });
 };
@@ -90,6 +105,18 @@ export default class GoodsTable extends Component {
     });
   };
 
+  addData = (values) => {
+    const params = {
+      ...values
+    };
+
+    addData(params).then(() => {
+      success('add');
+      this.fetchData();
+    });
+
+  };
+
   renderOper = () => {
     return (
       <div>
@@ -100,9 +127,18 @@ export default class GoodsTable extends Component {
         >
           详情
         </Button>
-        <Button type="normal" warning onClick={this.handleDelete}>
+        <Button type="normal" warning onClick={this.handleDelete} style={{ marginRight: '5px' }}>
           删除
         </Button>
+        <Button type="primary" onClick={this.handleDetail} style={{ marginRight: '5px' }}>
+          出库
+        </Button>
+
+        <Button type="secondary" onClick={this.handleDelete} style={{ marginRight: '5px' }}>
+          调整
+        </Button>
+
+
       </div>
     );
   };
@@ -114,17 +150,19 @@ export default class GoodsTable extends Component {
       <div style={styles.container}>
 
         <IceContainer>
+          <AddDialog
+            addData={this.addData}
+          />
           <Table loading={isLoading} dataSource={data} hasBorder={false}>
-            <Table.Column title="会员名称" dataIndex="name" />
-            <Table.Column title="会员等级" dataIndex="level" />
-            <Table.Column title="会员余额(元)" dataIndex="balance" />
-            <Table.Column title="累计消费(元)" dataIndex="accumulative" />
-            <Table.Column title="注册时间" dataIndex="regdate" />
-            <Table.Column title="生日时间" dataIndex="birthday" />
-            <Table.Column title="归属门店" dataIndex="store" />
+            <Table.Column title="机构ID" dataIndex="organizationId" />
+            <Table.Column title="机构名称" dataIndex="organizationIdName" />
+            <Table.Column title="级别" dataIndex="level" />
+            <Table.Column title="状态" dataIndex="status" />
+            <Table.Column title="出入库方向" dataIndex="inOut" />
+            <Table.Column title="出入库时间" dataIndex="inOutTime" />
+            <Table.Column title="出入库申请人" dataIndex="inOutPerson" />
             <Table.Column
               title="操作"
-              width={200}
               dataIndex="oper"
               cell={this.renderOper}
             />
