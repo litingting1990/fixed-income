@@ -27,6 +27,7 @@
     "classname": "^0.0.0",
     "classnames": "^2.2.5",
     "enquire-js": "^0.1.2",
+    "js-cookie": "^2.2.0",
     "moment": "^2.23.0",
     "prop-types": "^15.5.8",
     "react": "^16.4.1",

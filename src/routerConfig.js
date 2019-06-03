@@ -4,22 +4,37 @@
 
 import UserLogin from './pages/UserLogin';
 import UserRegister from './pages/UserRegister';
+import AntiMoney from './pages/riskManagement/AntiMoney';
+import CreditRisk from './pages/riskManagement/CreditRisk';
+import Relevance from './pages/riskManagement/Relevance';
+import SalesRepository from './pages/riskManagement/SalesRepository';
 
 
 const routerConfig = [
   {
     path: '/user/login',
-    component: UserLogin,
+    component: UserLogin
   },
   {
     path: '/user/register',
-    component: UserRegister,
+    component: UserRegister
   },
-
-
   {
-
+    path: '/riskManagement/antiMoney',
+    component: AntiMoney
   },
+  {
+    path: '/riskManagement/creditRisk',
+    component: CreditRisk
+  },
+  {
+    path: '/riskManagement/relevance',
+    component: Relevance
+  },
+  {
+    path: '/riskManagement/salesRepository',
+    component: SalesRepository
+  }
 ];
 
 export default routerConfig;

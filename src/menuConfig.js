@@ -15,9 +15,9 @@ const asideMenuConfig = [
       { name: '销售对手库管理', path: '/riskManagement/salesRepository' },
       { name: '信用风险管理', path: '/riskManagement/creditRisk' },
       { name: '反洗钱管理', path: '/riskManagement/antiMoney' },
-      { name: '关联机构名单', path: '/riskManagement/relevance' },
-    ],
-  },
+      { name: '关联机构名单', path: '/riskManagement/relevance' }
+    ]
+  }
 ];
 
 export { headerMenuConfig, asideMenuConfig };
