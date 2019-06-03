@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Table, Pagination, Button, Dialog } from '@alifd/next';
 import { FormattedMessage } from 'react-intl';
 import IceContainer from '@icedesign/container';
-import FilterTag from '../FilterTag';
-import FilterForm from '../FilterForm';
+
 
 // Random Numbers
 const random = (min, max) => {
@@ -114,10 +113,7 @@ export default class GoodsTable extends Component {
 
     return (
       <div style={styles.container}>
-        <IceContainer>
-          <FilterTag onChange={this.handleFilterChange} />
-          <FilterForm onChange={this.handleFilterChange} />
-        </IceContainer>
+
         <IceContainer>
           <Table loading={isLoading} dataSource={data} hasBorder={false}>
             <Table.Column title="会员名称" dataIndex="name" />
