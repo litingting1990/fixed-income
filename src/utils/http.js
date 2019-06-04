@@ -5,10 +5,8 @@ import Cookies from 'js-cookie';
 import qs from 'qs';
 
 
-const token = 'd2c1e6e2-6027-4d14-85e3-fbb6611771f7';
-
-axios.defaults.baseURL = 'http://118.31.43.6:8089/risk';
-
+// axios.defaults.baseURL = 'http://118.31.43.6:8089/risk';
+axios.defaults.baseURL = '/risk';
 axios.defaults.timeout = 600000;
 
 
@@ -30,8 +28,8 @@ export default (api, method = MethodType.GET, params, config = {}) => {
 
   let headers = {
     'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`
+    'Content-Type': 'application/json'
+    // Authorization: `Bearer ${token}`
   };
   let responseType = 'json';
 
