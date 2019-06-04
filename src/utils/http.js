@@ -7,16 +7,11 @@ import qs from 'qs';
 
 const token = 'd2c1e6e2-6027-4d14-85e3-fbb6611771f7';
 
-axios.defaults.baseURL = 'http://10.111.64.251:32701/api';
+axios.defaults.baseURL = 'http://118.31.43.6:8000';
 
 axios.defaults.timeout = 600000;
 
-// const token = Cookies.get('user_usopp') && JSON.parse(Cookies.get('user_usopp')).token;
 
-// axios.defaults.baseURL = `http://${document.domain}:32701/api`;
-
-
-// axios.defaults.withCredentials = true;
 const MethodType = {
   GET: 'GET',
   POST: 'POST',

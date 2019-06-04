@@ -1,8 +1,8 @@
 import http from '@utils/http';
 
-
-export async function addData(params) {
-  return {};
+// 获取机构列表
+export async function getOrgList() {
+  return http('/basic/org/list', 'GET');
 }
 
 
