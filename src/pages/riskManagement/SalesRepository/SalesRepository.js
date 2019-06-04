@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Table from './components/Table';
 import TabTable from './components/TabTable';
 
 export default class SalesRepository extends Component {
@@ -13,7 +12,6 @@ export default class SalesRepository extends Component {
   render() {
     return (
       <div className="basic-table-page">
-        <Table />
         <TabTable />
       </div>
     );

@@ -11,8 +11,7 @@ export default class EditDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
-      dataIndex: null
+      visible: false
     };
     this.field = new Field(this);
   }
@@ -23,10 +22,7 @@ export default class EditDialog extends Component {
         console.log('Errors in form!!!');
         return;
       }
-
-      const { dataIndex } = this.state;
-
-      this.props.getFormValues(dataIndex, values);
+      this.props.updateData(values);
       this.setState({
         visible: false
       });
@@ -36,8 +32,7 @@ export default class EditDialog extends Component {
   onOpen = (index, record) => {
     this.field.setValues({ ...record });
     this.setState({
-      visible: true,
-      dataIndex: index
+      visible: true
     });
   };
 
@@ -74,33 +69,33 @@ export default class EditDialog extends Component {
           title="编辑"
         >
           <Form field={this.field}>
-            <FormItem label="标题：" {...formItemLayout}>
+            <FormItem label="机构" {...formItemLayout}>
               <Input
-                {...init('title', {
+                {...init('organization', {
                   rules: [{ required: true, message: '必填选项' }]
                 })}
               />
             </FormItem>
 
-            <FormItem label="作者：" {...formItemLayout}>
+            <FormItem label="机构全称" {...formItemLayout}>
               <Input
-                {...init('author', {
+                {...init('organizationName', {
                   rules: [{ required: true, message: '必填选项' }]
                 })}
               />
             </FormItem>
 
-            <FormItem label="状态：" {...formItemLayout}>
+            <FormItem label="级别" {...formItemLayout}>
               <Input
-                {...init('status', {
+                {...init('level', {
                   rules: [{ required: true, message: '必填选项' }]
                 })}
               />
             </FormItem>
 
-            <FormItem label="发布时间：" {...formItemLayout}>
+            <FormItem label="入库原因" {...formItemLayout}>
               <Input
-                {...init('date', {
+                {...init('reason', {
                   rules: [{ required: true, message: '必填选项' }]
                 })}
               />

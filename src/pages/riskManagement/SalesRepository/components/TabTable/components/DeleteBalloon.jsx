@@ -4,13 +4,6 @@ import { Button, Balloon } from '@alifd/next';
 import PropTypes from 'prop-types';
 
 export default class DeleteBalloon extends Component {
-  static propTypes = {
-    handleRemove: PropTypes.func
-  };
-
-  static defaultProps = {
-    handleRemove: () => { }
-  };
 
   constructor(props) {
     super(props);
@@ -21,7 +14,7 @@ export default class DeleteBalloon extends Component {
 
   handleHide = (visible, code) => {
     if (code === 1) {
-      this.props.handleRemove();
+      this.props.deleteData();
     }
     this.setState({
       visible: false
@@ -34,7 +27,7 @@ export default class DeleteBalloon extends Component {
 
   render() {
     const visibleTrigger = (
-      <Button type="secondary" warning>
+      <Button type="normal" warning>
         删除
       </Button>
     );

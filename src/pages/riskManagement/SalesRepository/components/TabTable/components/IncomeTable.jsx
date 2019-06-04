@@ -3,7 +3,8 @@ import { Table, Pagination, Button, Dialog } from '@alifd/next';
 import IceContainer from '@icedesign/container';
 import { success } from '@utils/iceNotification';
 import { getOrgList } from '@api/riskManagement/SalesRepository';
-
+import EditDialog from './EditDialog';
+import DeleteBalloon from './DeleteBalloon';
 // Random Numbers
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -115,60 +116,42 @@ export default class GoodsTable extends Component {
           });
         }
       });
+    }
 
-    //   let orgList = [
-    //     {
-    //       id: 21,
-    //       name: '安信信托',
-    //       fullname: '安信信托股份有限公司'
-    //     },
-    //     {
-    //       id: 22,
-    //       name: '河南遂平农商银行',
-    //       fullname: '河南遂平农村商业银行股份有限公司'
-    //     },
-    //     {
-    //       id: 23,
-    //       name: '兴业全球基金公司',
-    //       fullname: '兴业全球基金管理有限公司'
-    //     }
-    //   ];
+    updateData = (values) => {
+      console.log('values', values);
+    }
 
-    //   orgList = orgList.map((item) => {
-    //     return {
-    //       label: item.name,
-    //       value: item.id
-    //     };
-    //   });
-
-    //   this.setState({
-    //     orgList
-    //   });
+    deleteData = (value, index, record) => {
+      console.log('record', record);
     }
 
 
-    renderOper = () => {
+    renderOperate = (value, index, record) => {
       return (
         <div>
-          <Button
-            type="primary"
-            style={{ marginRight: '5px' }}
-            onClick={this.handleDetail}
-          >
-                    详情
-          </Button>
-          <Button type="normal" warning onClick={this.handleDelete} style={{ marginRight: '5px' }}>
-                    删除
-          </Button>
-          <Button type="primary" onClick={this.handleDetail} style={{ marginRight: '5px' }}>
-                    出库
-          </Button>
-
-          <Button type="secondary" onClick={this.handleDelete} style={{ marginRight: '5px' }}>
-                    调整
-          </Button>
-
-
+          <EditDialog
+            record={record}
+            updateData={this.updateData}
+          />
+          <DeleteBalloon
+            deleteData={() => this.deleteData(value, index, record)}
+          />
+        </div>
+      );
+    };
+    renderState = (value) => {
+      console.log('value', value);
+      if (value === '灰名单') {
+        return (
+          <div>
+            <span style={styles.stateGrey}>{value}</span>
+          </div>
+        );
+      }
+      return (
+        <div>
+          <span style={styles.stateBlack}>{value}</span>
         </div>
       );
     };
@@ -206,12 +189,16 @@ export default class GoodsTable extends Component {
                 filterMode="single"
               />
               <Table.Column title="机构全称" dataIndex="organizationName" />
-              <Table.Column title="级别" dataIndex="level" />
+              <Table.Column
+                title="级别"
+                dataIndex="level"
+                cell={this.renderState}
+              />
               <Table.Column title="入库原因" dataIndex="reason" />
               <Table.Column
                 title="操作"
                 dataIndex="operate"
-                cell={this.renderOper}
+                cell={this.renderOperate}
               />
             </Table>
             <Pagination
@@ -229,5 +216,21 @@ const styles = {
   pagination: {
     marginTop: '20px',
     textAlign: 'right'
+  },
+  stateGrey: {
+    display: 'inline-block',
+    padding: '5px 10px',
+    color: '#52c41a',
+    background: '#f6ffed',
+    border: '1px solid #b7eb8f',
+    borderRadius: '4px'
+  },
+  stateBlack: {
+    display: 'inline-block',
+    padding: '5px 10px',
+    color: 'red',
+    background: '#f6ffed',
+    border: '1px solid red',
+    borderRadius: '4px'
   }
 };
