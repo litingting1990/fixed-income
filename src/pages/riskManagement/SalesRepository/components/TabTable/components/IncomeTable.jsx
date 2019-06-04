@@ -101,49 +101,49 @@ export default class GoodsTable extends Component {
     };
 
     getOrgList = () => {
-    //   getOrgList().then((res) => {
-    //     const orgList = res.data && res.data.data.map((item) => {
-    //       return {
-    //         label: item.name,
-    //         value: item.id
-    //       };
-    //     });
+      getOrgList().then((res) => {
+        const orgList = res.data && res.data.data.map((item) => {
+          return {
+            label: item.name,
+            value: item.id
+          };
+        });
 
-    //     if (orgList) {
-    //       this.setState({
-    //         orgList
-    //       });
+        if (orgList) {
+          this.setState({
+            orgList
+          });
+        }
+      });
+
+    //   let orgList = [
+    //     {
+    //       id: 21,
+    //       name: '安信信托',
+    //       fullname: '安信信托股份有限公司'
+    //     },
+    //     {
+    //       id: 22,
+    //       name: '河南遂平农商银行',
+    //       fullname: '河南遂平农村商业银行股份有限公司'
+    //     },
+    //     {
+    //       id: 23,
+    //       name: '兴业全球基金公司',
+    //       fullname: '兴业全球基金管理有限公司'
     //     }
+    //   ];
+
+    //   orgList = orgList.map((item) => {
+    //     return {
+    //       label: item.name,
+    //       value: item.id
+    //     };
     //   });
 
-      let orgList = [
-        {
-          id: 21,
-          name: '安信信托',
-          fullname: '安信信托股份有限公司'
-        },
-        {
-          id: 22,
-          name: '河南遂平农商银行',
-          fullname: '河南遂平农村商业银行股份有限公司'
-        },
-        {
-          id: 23,
-          name: '兴业全球基金公司',
-          fullname: '兴业全球基金管理有限公司'
-        }
-      ];
-
-      orgList = orgList.map((item) => {
-        return {
-          label: item.name,
-          value: item.id
-        };
-      });
-
-      this.setState({
-        orgList
-      });
+    //   this.setState({
+    //     orgList
+    //   });
     }
 
 

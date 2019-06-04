@@ -61,7 +61,7 @@
     "ice-plugin-moment-locales": "^0.1.0"
   },
   "scripts": {
-    "start": "ice-scripts dev",
+    "start": "ice-scripts dev -p 8000",
     "build": "ice-scripts build",
     "lint": "eslint . --ext '.js,.jsx' --fix"
   },
