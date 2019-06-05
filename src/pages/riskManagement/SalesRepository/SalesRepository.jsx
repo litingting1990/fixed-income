@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import IceContainer from '@icedesign/container';
 import { Tab } from '@alifd/next';
+import CustomBreadcrumb from '@components/CustomBreadcrumb';
 import { getOrgList, getUserList } from '@api/riskManagement/SalesRepository';
 import IncomeTable from './components/IncomeTable';
 
@@ -55,9 +56,14 @@ export default class SalesRepository extends Component {
   }
   render() {
     const { orgList, userList } = this.state;
+    const breadcrumb = [
+      { text: '风险控制', link: '' },
+      { text: '销售对手库管理', link: '#/riskManagement/salesRepository' }
+    ];
 
     return (
       <div className="basic-table-page">
+        <CustomBreadcrumb dataSource={breadcrumb} />
         {
           orgList.length > 0 ? (
             <IceContainer>
