@@ -112,8 +112,9 @@ export default class IncomeTable extends Component {
   }
 
   addData = (values) => {
+    console.log(values);
     const params = {
-
+      ...values
     };
 
     addData(params).then(() => {
