@@ -5,8 +5,8 @@ import Cookies from 'js-cookie';
 import qs from 'qs';
 
 
-axios.defaults.baseURL = 'http://118.31.43.6:8089/risk';
-// axios.defaults.baseURL = '/risk';
+// axios.defaults.baseURL = 'http://118.31.43.6:8089/risk';
+axios.defaults.baseURL = '/risk';
 axios.defaults.timeout = 600000;
 
 
