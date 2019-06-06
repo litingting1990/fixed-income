@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dialog, Button, Form, Input, Field, Icon } from '@alifd/next';
+import { Dialog, Button, Form, Input, Field, Icon, Switch } from '@alifd/next';
 
 const FormItem = Form.Item;
 
@@ -19,7 +19,6 @@ export default class EditDialog extends Component {
   handleSubmit = () => {
     this.field.validate((errors, values) => {
       if (errors) {
-        console.log('Errors in form!!!');
         return;
       }
       this.props.updateData(values);
@@ -41,6 +40,7 @@ export default class EditDialog extends Component {
       visible: false
     });
   };
+
 
   render() {
     const init = this.field.init;
@@ -69,32 +69,46 @@ export default class EditDialog extends Component {
           title="调整"
         >
           <Form field={this.field}>
-            <FormItem label="机构" {...formItemLayout}>
+            <FormItem label="机构简称" {...formItemLayout}>
               <Input
-                {...init('organization', {
-                  rules: [{ required: true, message: '必填选项' }]
-                })}
+                disabled
+                {...init('orgname')}
               />
             </FormItem>
 
             <FormItem label="机构全称" {...formItemLayout}>
               <Input
-                {...init('organizationName', {
-                  rules: [{ required: true, message: '必填选项' }]
-                })}
+                disabled
+                {...init('orgfullname')}
               />
             </FormItem>
 
-            <FormItem label="级别" {...formItemLayout}>
+
+            <FormItem label="状态" {...formItemLayout}>
               <Input
-                {...init('level', {
-                  rules: [{ required: true, message: '必填选项' }]
-                })}
+                disabled
+                {...init('status')}
+                value={init('status').value === 0 ? '在库' : '已出库'}
+              />
+            </FormItem>
+            <FormItem label="入库申请人名称" {...formItemLayout}>
+              <Input
+                disabled
+                {...init('putapplicanter')}
+              />
+            </FormItem>
+            <FormItem label="新等级调整为" {...formItemLayout}>
+              <Switch
+                checkedChildren="黑名单"
+                unCheckedChildren="灰名单"
+                checked={init('grade').value !== 0}
+                style={{ width: '80px' }}
               />
             </FormItem>
 
-            <FormItem label="入库原因" {...formItemLayout}>
-              <Input
+            <FormItem label="调整原因" required {...formItemLayout}>
+              <Input.TextArea
+                placeholder="请输入调整原因"
                 {...init('reason', {
                   rules: [{ required: true, message: '必填选项' }]
                 })}

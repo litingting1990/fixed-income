@@ -113,6 +113,16 @@ export default class IncomeTable extends Component {
 
   updateData = (values) => {
     console.log('values', values);
+    const params = { applydatetime: '2019-06-06T04:45:02.854Z', id: values.id, pid: values.putid, title: '关于xxx销售对手库入库申请', direction: '0', applyuserid: '1', applyusername: '管理员' };
+
+    params.details = [
+      { id: values.id, fid: '0', direction: '0', orgid: values.orgid, orgname: values.orgname, orgfullname: values.orgfullname, grade1: values.grade === 0 ? 1 : 0, grade2: values.grade, reason: values.reason }
+
+    ];
+    updateData(params).then(() => {
+      success('调整成功');
+      this.getList();
+    });
   }
 
   deleteData = (values) => {
