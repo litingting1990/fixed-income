@@ -56,7 +56,9 @@ export default class IncomeTable extends Component {
             updateData={this.updateData}
           />
           <DeleteBalloon
-            deleteData={() => this.deleteData(value, index, record)}
+            index={index}
+            record={record}
+            deleteData={this.deleteData}
           />
         </div>
       );
@@ -115,8 +117,16 @@ export default class IncomeTable extends Component {
     console.log('values', values);
   }
 
-  deleteData = (value, index, record) => {
-    console.log('record', record);
+  deleteData = (values) => {
+    const params = { applydatetime: '2019-06-06T04:45:02.854Z', id: values.id, pid: values.putid, title: '关于xxx销售对手库入库申请', direction: '1', applyuserid: '1', applyusername: '管理员' };
+
+    params.details = [
+      { id: values.id, fid: '0', direction: '1', orgid: values.orgid, orgname: values.orgname, orgfullname: values.orgfullname, grade1: values.grade, grade2: values.grade, reason: values.reason }
+
+    ];
+    deleteData(params).then(() => {
+      this.getList();
+    });
   }
 
 
@@ -202,11 +212,11 @@ export default class IncomeTable extends Component {
               cell={this.renderOperate}
             />
           </Table>
-          <Pagination
+          {/* <Pagination
             style={styles.pagination}
             current={current}
             onChange={this.handlePaginationChange}
-          />
+          /> */}
         </IceContainer>
       </div>
     );

@@ -57,7 +57,7 @@ export default class EditDialog extends Component {
     return (
       <div style={styles.editDialog}>
         <Button type="primary" onClick={() => this.onOpen(index, record)}>
-          编辑
+        调整
         </Button>
         <Dialog
           style={{ width: 640 }}
@@ -66,7 +66,7 @@ export default class EditDialog extends Component {
           closeable="esc,mask,close"
           onCancel={this.onClose}
           onClose={this.onClose}
-          title="编辑"
+          title="调整"
         >
           <Form field={this.field}>
             <FormItem label="机构" {...formItemLayout}>
