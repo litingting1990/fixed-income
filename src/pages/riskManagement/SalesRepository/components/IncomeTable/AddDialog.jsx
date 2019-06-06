@@ -59,10 +59,14 @@ export default class EditDialog extends Component {
     };
 
     return (
-      <div style={styles.addDialog}>
+      <div>
         <Button
           type="primary"
           onClick={() => this.onOpen()}
+          style={{
+            display: 'inline-block',
+            marginBottom: '10px'
+          }}
         >
           <Icon type="add" /> 入库
         </Button>
@@ -106,10 +110,4 @@ export default class EditDialog extends Component {
   }
 }
 
-const styles = {
-  addDialog: {
-    display: 'inline-block',
-    marginRight: '5px',
-    marginTop: '10px'
-  }
-};
+

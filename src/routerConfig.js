@@ -5,6 +5,8 @@ import React from 'react';
 import { getRouterData } from './utils/utils';
 import { asideMenuConfig } from './menuConfig';
 
+const Record = React.lazy(() => import('./pages/riskManagement/SalesRepository/components/Record'));
+
 
 const AntiMoney = React.lazy(() => import('./pages/riskManagement/AntiMoney'));
 const CreditRisk = React.lazy(() => import('./pages/riskManagement/CreditRisk'));
@@ -63,6 +65,10 @@ const routerConfig = [
   {
     path: '/riskManagement/salesRepository',
     component: SalesRepository
+  },
+  {
+    path: '/riskManagement/salesRepository-record',
+    component: Record
   }
 ];
 

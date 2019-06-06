@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Table, Pagination, Dialog } from '@alifd/next';
 import IceContainer from '@icedesign/container';
 import { success } from '@utils/iceNotification';
-import { getList, addData, deleteData, updateData } from '@api/riskManagement/SalesRepository';
+import { getList, deleteData, updateData } from '@api/riskManagement/SalesRepository';
 import EditDialog from './EditDialog';
 import DeleteBalloon from './DeleteBalloon';
-import AddDialog from './AddDialog';
 
 
 export default class IncomeTable extends Component {
@@ -111,18 +110,6 @@ export default class IncomeTable extends Component {
     });
   }
 
-  addData = (values) => {
-    console.log(values);
-    const params = {
-      ...values
-    };
-
-    addData(params).then(() => {
-      success('add');
-      this.getList();
-    });
-
-  };
 
   updateData = (values) => {
     console.log('values', values);
@@ -149,13 +136,9 @@ export default class IncomeTable extends Component {
     const { orgList } = this.props;
 
     return (
-      <div style={styles.container}>
-        <AddDialog
-          addData={this.addData}
-          orgList={orgList}
-        />
+      <div style={{ marginTop: '10px' }}>
         <IceContainer
-          style={{ padding: '10px 0' }}
+          style={{ padding: 0 }}
         >
           <Table
             loading={isLoading}

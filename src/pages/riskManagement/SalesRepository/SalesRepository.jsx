@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { Button, Icon } from '@alifd/next';
 import axios from 'axios';
 import IceContainer from '@icedesign/container';
-import { Tab } from '@alifd/next';
 import CustomBreadcrumb from '@components/CustomBreadcrumb';
 import { getOrgList, getUserList } from '@api/riskManagement/SalesRepository';
 import IncomeTable from './components/IncomeTable';
 
-
+@withRouter
 export default class SalesRepository extends Component {
   static displayName = 'SalesRepository';
 
@@ -51,6 +52,11 @@ export default class SalesRepository extends Component {
   //     }
   //   });
   // }
+
+
+  handleRecord = () => {
+    this.props.history.push('/riskManagement/salesRepository-record');
+  }
   componentWillMount() {
     this.getOrgAndUser();
   }
@@ -66,24 +72,16 @@ export default class SalesRepository extends Component {
         <CustomBreadcrumb dataSource={breadcrumb} />
         {
           orgList.length > 0 ? (
-            <IceContainer>
-              <Tab onChange={this.handleTabChange}>
-                <Tab.Item title="入库" key="income">
-                  <IncomeTable
-                    orgList={orgList}
-                    userList={userList}
-                  />
-                </Tab.Item>
-                <Tab.Item title="出库" key="outgoing">
-                出库
-                </Tab.Item>
-                <Tab.Item title="调整" key="adjust">
-                调整
-                </Tab.Item>
-                <Tab.Item title="申请" key="apply">
-                申请
-                </Tab.Item>
-              </Tab>
+            <IceContainer style={{ padding: '10px' }}>
+              <Button type="primary" onClick={this.handleRecord} style={{ marginRight: '10px' }}>
+                <Icon type="add" />入库
+              </Button>
+              <Button type="primary" onClick={this.handleRecord}>
+                <Icon type="search" />记录查询
+              </Button>
+              <IncomeTable
+                userList={userList}
+              />
             </IceContainer>
           ) : null
         }

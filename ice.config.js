@@ -17,13 +17,14 @@ module.exports = {
     '@api': path.resolve(__dirname, 'src/api/'),
     '@pages': path.resolve(__dirname, 'src/pages/'),
     '@store': path.resolve(__dirname, 'src/store/'),
-    '@utils': path.resolve(__dirname, 'src/utils/')
+    '@utils': path.resolve(__dirname, 'src/utils/'),
+    '@images': path.resolve(__dirname, 'src/images/')
+  },
+  proxy: {
+    '/**': {
+      enable: true,
+      target: 'http://118.31.43.6:8089',
+      changeOrigin: true
+    }
   }
-  // proxy: {
-  //   '/**': {
-  //     enable: true,
-  //     target: 'http://118.31.43.6:8089',
-  //     changeOrigin: true
-  //   }
-  // }
 };
