@@ -5,13 +5,13 @@ import React from 'react';
 import { getRouterData } from './utils/utils';
 import { asideMenuConfig } from './menuConfig';
 
-const Record = React.lazy(() => import('./pages/riskManagement/SalesRepository/components/Record'));
-
 
 const AntiMoney = React.lazy(() => import('./pages/riskManagement/AntiMoney'));
 const CreditRisk = React.lazy(() => import('./pages/riskManagement/CreditRisk'));
 const Relevance = React.lazy(() => import('./pages/riskManagement/Relevance'));
 const SalesRepository = React.lazy(() => import('./pages/riskManagement/SalesRepository'));
+const SalesRepositoryRecord = React.lazy(() => import('./pages/riskManagement/SalesRepository/components/SalesRepositoryRecord'));
+const SalesRepositoryAdd = React.lazy(() => import('./pages/riskManagement/SalesRepository/components/SalesRepositoryAdd'));
 
 const UserLogin = React.lazy(() => import('./pages/UserLogin'));
 const UserRegister = React.lazy(() => import('./pages/UserRegister'));
@@ -68,7 +68,11 @@ const routerConfig = [
   },
   {
     path: '/riskManagement/salesRepository-record',
-    component: Record
+    component: SalesRepositoryRecord
+  },
+  {
+    path: '/riskManagement/salesRepository-add',
+    component: SalesRepositoryAdd
   }
 ];
 

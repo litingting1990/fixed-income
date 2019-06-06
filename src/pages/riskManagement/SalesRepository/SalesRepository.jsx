@@ -57,6 +57,10 @@ export default class SalesRepository extends Component {
   handleRecord = () => {
     this.props.history.push('/riskManagement/salesRepository-record');
   }
+
+  handleAdd = () => {
+    this.props.history.push('/riskManagement/salesRepository-add');
+  }
   componentWillMount() {
     this.getOrgAndUser();
   }
@@ -73,7 +77,7 @@ export default class SalesRepository extends Component {
         {
           orgList.length > 0 ? (
             <IceContainer style={{ padding: '10px' }}>
-              <Button type="primary" onClick={this.handleRecord} style={{ marginRight: '10px' }}>
+              <Button type="primary" onClick={this.handleAdd} style={{ marginRight: '10px' }}>
                 <Icon type="add" />入库
               </Button>
               <Button type="primary" onClick={this.handleRecord}>

@@ -6,8 +6,8 @@ import CustomTable from './components/CustomTable';
 
 import data from './data';
 
-export default class Record extends Component {
-  static displayName = 'Record';
+export default class SalesRepositoryRecord extends Component {
+  static displayName = 'SalesRepositoryRecord';
 
   static propTypes = {};
 
@@ -73,7 +73,7 @@ export default class Record extends Component {
     const breadcrumb = [
       { text: '风险控制', link: '' },
       { text: '销售对手库管理', link: '#/riskManagement/salesRepository' },
-      { text: '记录查询', link: '#/riskManagement/salesRepository-record' }
+      { text: '销售对手库记录查询', link: '#/riskManagement/salesRepository-record' }
     ];
 
     return (
