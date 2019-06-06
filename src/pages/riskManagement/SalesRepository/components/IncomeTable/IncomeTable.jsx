@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { Table, Pagination, Dialog } from '@alifd/next';
 import IceContainer from '@icedesign/container';
 import { success } from '@utils/iceNotification';
@@ -31,49 +32,64 @@ export default class IncomeTable extends Component {
     );
   }
 
-    // 状态
-    renderStatus = (value, index, record) => {
-      return (
-        <span
-          style={{
-            color: value === 1 ? '#f7da47' : 'red',
-            width: '100px',
-            fontWeight: '500',
-            textAlign: value === 1 ? 'right' : 'left',
-            display: 'inline-block'
-          }}
-        >
-          {value === 1 ? '已出库' : '在库'}
+  // 状态
+  renderStatus = (value, index, record) => {
+    return (
+      <div>
+        <span style={{
+          display: 'inline-block',
+          background: value === 0 ? '#28a745' : '#333',
+          width: '8px',
+          height: '8px',
+          borderRadius: '50px',
+          marginRight: '4px'
+        }}
+        />
+        <span style={{
+          color: value === 0 ? '#28a745' : '#333'
+        }}
+        >{value === 1 ? '已出库' : '在库'}
         </span>
-      );
-    }
-    // 操作
-    renderOperate = (value, index, record) => {
-      return (
-        <div>
-          <EditDialog
-            record={record}
-            updateData={this.updateData}
-          />
-          <DeleteBalloon
-            index={index}
-            record={record}
-            deleteData={this.deleteData}
-          />
-        </div>
-      );
-    };
+      </div>
 
-  // handlePaginationChange = (current) => {
-  //   this.setState(
-  //     {
-  //       current
-  //     },
-  //     () => {
-  //       this.getList();
-  //     }
-  //   );
-  // };
+    );
+  }
+
+  // 入库时间
+  renderPuttime = (value, index, record) => {
+    return (
+      <span>
+        {moment(value).format('YYYY/MM/DD HH:mm:ss')}
+      </span>
+    );
+  }
+  // 操作
+  renderOperate = (value, index, record) => {
+    return (
+      <div>
+        <EditDialog
+          record={record}
+          updateData={this.updateData}
+        />
+        <DeleteBalloon
+          index={index}
+          record={record}
+          deleteData={this.deleteData}
+        />
+      </div>
+    );
+  };
+
+  handlePaginationChange = (current) => {
+    this.setState(
+      {
+        current
+      },
+      () => {
+        this.getList();
+      }
+    );
+  };
 
 
   getList = () => {
@@ -171,6 +187,7 @@ export default class IncomeTable extends Component {
               title="入库时间"
               dataIndex="puttime"
               key="puttime"
+              cell={this.renderPuttime}
             />
             {/* <Table.Column
               title="出库申请人名称"
@@ -188,11 +205,11 @@ export default class IncomeTable extends Component {
               cell={this.renderOperate}
             />
           </Table>
-          {/* <Pagination
+          <Pagination
             style={styles.pagination}
             current={current}
             onChange={this.handlePaginationChange}
-          /> */}
+          />
         </IceContainer>
       </div>
     );
