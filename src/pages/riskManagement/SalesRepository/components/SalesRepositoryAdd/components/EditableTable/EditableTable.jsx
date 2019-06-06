@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import IceContainer from '@icedesign/container';
-import { Table, Button } from '@alifd/next';
+import { Table, Button, Icon } from '@alifd/next';
 import { getOrgList, getUserList, addData } from '@api/riskManagement/SalesRepository';
+import { success } from '@utils/iceNotification';
 import CellEditorInput from './CellEditorInput';
 import CellEditorSelect from './CellEditorSelect';
 import CellEditorRadio from './CellEditorRadio';
@@ -42,23 +43,34 @@ export default class EditableTable extends Component {
     });
   };
 
-  addItem = (record) => {
+  addItem = (index, record) => {
     const params = { id: '', pid: '', title: '关于xxx销售对手库入库申请', direction: '0', applyuserid: '0', applyusername: '管理员' };
 
     params.details = [
       { id: '', fid: '', direction: '0', orgid: record.org.id, orgname: record.org.name, orgfullname: record.org.fullname, grade1: record.grade, grade2: '0', reason: record.reason }
 
     ];
-    addData(params).then((res) => {
-      console.log('res', res);
+    addData(params).then(() => {
+
+      this.state.dataSource[index].isIncome = !this.state.dataSource[index].isIncome;
+      this.setState({
+        dataSource: this.state.dataSource
+      }, () => {
+        success('入库成功');
+      });
     });
   };
 
   renderOperation = (value, index, record) => {
+    if (record.isIncome) {
+      return (
+        <Icon type="select" style={{ color: '#1DC11D' }} />
+      );
+    }
     return (
       <div>
         <Button
-          onClick={this.addItem.bind(this, record)}
+          onClick={this.addItem.bind(this, index, record)}
           type="primary"
           style={{ marginRight: '5px' }}
         >
@@ -75,6 +87,7 @@ export default class EditableTable extends Component {
     );
   };
 
+  // 编辑框
   changeDataSource = (index, valueKey, value) => {
     this.state.dataSource[index][valueKey] = value;
     this.setState({
@@ -83,6 +96,11 @@ export default class EditableTable extends Component {
   };
 
   renderEditorInput = (valueKey, value, index, record) => {
+    if (record.isIncome) {
+      return (
+        <span>{record[valueKey]}</span>
+      );
+    }
     return (
       <CellEditorInput
         valueKey={valueKey}
@@ -93,6 +111,8 @@ export default class EditableTable extends Component {
       />
     );
   };
+
+  // 下拉框
   changeSelectData = (value, index) => {
 
     this.state.dataSource[index].org = value;
@@ -105,6 +125,11 @@ export default class EditableTable extends Component {
   renderEditorSelect = (valueKey, value, index, record) => {
     const { orgList } = this.state;
 
+    if (record.isIncome) {
+      return (
+        <span>{record[valueKey].name}</span>
+      );
+    }
     return (
       <CellEditorSelect
         key={valueKey}
@@ -127,6 +152,11 @@ export default class EditableTable extends Component {
   }
 
   renderEditorRadio = (valueKey, value, index, record) => {
+    if (record.isIncome) {
+      return (
+        <span>{record[valueKey] === 0 ? '黑名单' : '灰名单'}</span>
+      );
+    }
     return (
       <CellEditorRadio
         key={valueKey}
@@ -143,7 +173,8 @@ export default class EditableTable extends Component {
     this.state.dataSource.push({
       org: orgList[0],
       grade: 0,
-      reason: '暂无'
+      reason: '暂无',
+      isIncome: false
     });
     this.setState({
       dataSource: this.state.dataSource
@@ -169,7 +200,7 @@ export default class EditableTable extends Component {
                     cell={this.renderEditorSelect.bind(this, 'org')}
                   />
                   <Table.Column
-                    width={200}
+                    width={260}
                     title="级别"
                     align="center"
                     cell={this.renderEditorRadio.bind(this, 'grade')}

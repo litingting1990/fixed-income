@@ -20,13 +20,13 @@ export default class IncomeTable extends Component {
     if (value === 0) {
       return (
         <div>
-          <span style={styles.stateBlack}>黑</span>
+          <span style={styles.stateBlack}>黑名单</span>
         </div>
       );
     }
     return (
       <div>
-        <span style={styles.stateGrey}>灰</span>
+        <span style={styles.stateGrey}>灰名单</span>
       </div>
     );
   }
@@ -36,7 +36,7 @@ export default class IncomeTable extends Component {
       return (
         <span
           style={{
-            color: value === 1 ? '#f7da47' : '#ee706d',
+            color: value === 1 ? '#f7da47' : 'red',
             width: '100px',
             fontWeight: '500',
             textAlign: value === 1 ? 'right' : 'left',
@@ -64,34 +64,16 @@ export default class IncomeTable extends Component {
       );
     };
 
-  handlePaginationChange = (current) => {
-    this.setState(
-      {
-        current
-      },
-      () => {
-        this.getList();
-      }
-    );
-  };
-
-
-  handleDelete = () => {
-    Dialog.confirm({
-      title: '提示',
-      content: '确认删除吗',
-      onOk: () => {
-        this.fetchData(10);
-      }
-    });
-  };
-
-  handleDetail = () => {
-    Dialog.confirm({
-      title: '提示',
-      content: '暂不支持查看详情'
-    });
-  };
+  // handlePaginationChange = (current) => {
+  //   this.setState(
+  //     {
+  //       current
+  //     },
+  //     () => {
+  //       this.getList();
+  //     }
+  //   );
+  // };
 
 
   getList = () => {
@@ -125,17 +107,11 @@ export default class IncomeTable extends Component {
 
     ];
     deleteData(params).then(() => {
+      success('出库成功');
       this.getList();
     });
   }
 
-
-  onFilter = (filterParams) => {
-    const orgId = filterParams[Object.keys(filterParams)[0]].selectedKeys[0];
-
-    console.log(orgId);
-
-  }
 
   componentWillMount() {
     this.getList();
@@ -154,7 +130,6 @@ export default class IncomeTable extends Component {
             loading={isLoading}
             dataSource={data}
             hasBorder={false}
-            onFilter={this.onFilter}
           >
             <Table.Column
               title="机构id"
@@ -176,6 +151,7 @@ export default class IncomeTable extends Component {
             <Table.Column
               title="等级"
               dataIndex="grade"
+              align="center"
               key="grade"
               cell={this.renderGrade}
             />
@@ -231,17 +207,17 @@ const styles = {
   stateGrey: {
     display: 'inline-block',
     padding: '5px 10px',
-    color: '#52c41a',
-    background: '#f6ffed',
-    border: '1px solid #b7eb8f',
+    color: 'gray',
+    background: 'transparent',
+    border: '1px solid gray',
     borderRadius: '4px'
   },
   stateBlack: {
     display: 'inline-block',
     padding: '5px 10px',
-    color: 'red',
-    background: '#f6ffed',
-    border: '1px solid red',
+    color: 'black',
+    background: 'transparent',
+    border: '1px solid black',
     borderRadius: '4px'
   }
 };

@@ -11,10 +11,10 @@ export default class CellEditorSelect extends Component {
       list: [
         {
           value: 0,
-          label: '黑'
+          label: '黑名单'
         }, {
           value: 1,
-          label: '灰'
+          label: '灰名单'
         }
       ]
     };
